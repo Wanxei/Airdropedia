@@ -200,7 +200,7 @@ const Home = () => {
       )}
 
       <div className="text-center space-y-3 sm:space-y-4">
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-blue-500">
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-blue-600">
           Discover Crypto Airdrops
         </h1>
         <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
@@ -281,86 +281,99 @@ const Home = () => {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredAirdrops.map((airdrop) => (
-          <div key={airdrop.id} className="bg-white/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group relative">
-            <div className="flex justify-between items-start mb-4 sm:mb-6">
-              <div className="flex-1 flex justify-between items-center pr-8">
-                <h2 className="text-lg sm:text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2 max-w-[60%]">
-                  {airdrop.project_name}
-                </h2>
-                <span className="px-3 sm:px-4 py-1.5 text-sm font-semibold text-white bg-blue-500 rounded-full shadow-sm">
-                  {airdrop.blockchain}
-                </span>
-              </div>
-              {airdrop.canEdit && (
-                <div className="relative">
-                  <button
-                    onClick={() => setActiveMenu(activeMenu === airdrop.id ? null : airdrop.id)}
-                    className="p-2 hover:bg-gray-100 rounded-full transition-colors kebab-menu"
-                  >
-                    <EllipsisVerticalIcon className="h-5 w-5 text-gray-500" />
-                  </button>
-                  {activeMenu === airdrop.id && (
-                    <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
-                      <div className="py-1">
-                        <button
-                          onClick={() => handleEdit(airdrop)}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(airdrop.id)}
-                          className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                        >
-                          Delete
-                        </button>
-                      </div>
+          <div key={airdrop.id} className="bg-white rounded-3xl p-6 shadow-md relative">
+            {airdrop.canEdit && (
+              <div className="absolute top-4 right-4 z-10 kebab-menu">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveMenu(activeMenu === airdrop.id ? null : airdrop.id);
+                  }}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <EllipsisVerticalIcon className="h-5 w-5 text-gray-500" />
+                </button>
+                {activeMenu === airdrop.id && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-20 border border-gray-100">
+                    <div className="py-1">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEdit(airdrop);
+                        }}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(airdrop.id);
+                        }}
+                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                      >
+                        Delete
+                      </button>
                     </div>
-                  )}
-                </div>
-              )}
-            </div>
-            
+                  </div>
+                )}
+              </div>
+            )}
+
             {airdrop.media_url && (
-              <div className="relative aspect-video mb-4 sm:mb-6 rounded-lg overflow-hidden">
+              <div className="mb-4 -mx-6 -mt-6">
                 <img
                   src={airdrop.media_url}
-                  alt={airdrop.project_name}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  alt={`${airdrop.project_name} media`}
+                  className="w-full h-48 object-cover rounded-t-3xl"
                 />
               </div>
             )}
 
-            <div className="space-y-4">
-              <div className="flex items-center justify-between text-sm sm:text-base">
-                <span className="font-medium text-gray-500">Ticker:</span>
-                <span className="font-bold text-gray-800">${airdrop.ticker}</span>
-              </div>
-              <div className="flex items-center justify-between text-sm sm:text-base">
-                <span className="font-medium text-gray-500">Cost:</span>
-                <span className="font-bold text-gray-800">{airdrop.cost}</span>
-              </div>
-              <div className="flex items-center justify-between text-sm sm:text-base">
-                <span className="font-medium text-gray-500">Funding:</span>
-                <span className="font-bold text-gray-800">{airdrop.funding}</span>
-              </div>
-              <div className="border-t border-gray-100 pt-4">
-                <h3 className="font-medium text-gray-800 mb-2">Steps to Participate:</h3>
-                <p className="text-gray-600 text-sm sm:text-base whitespace-pre-wrap">
-                  {airdrop.steps}
-                </p>
-              </div>
-              <a
-                href={airdrop.referral_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full px-6 py-3 text-center font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 mt-4"
-              >
-                Participate Now
-              </a>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              {airdrop.project_name}
+            </h2>
+
+            <div className="inline-block mb-6">
+              <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">
+                {airdrop.blockchain}
+              </span>
             </div>
+
+            <div className="space-y-4 mb-6">
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600">Ticker:</span>
+                <span className="font-bold text-gray-900">${airdrop.ticker}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600">Cost:</span>
+                <span className="font-bold text-gray-900">{airdrop.cost}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600">Funding:</span>
+                <div className="text-gray-900">{airdrop.funding}</div>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h3 className="font-medium text-gray-900 mb-2">Steps to Participate:</h3>
+              <ol className="list-decimal list-inside space-y-1 text-gray-600">
+                {airdrop.steps.split('\n').map((step, index) => (
+                  <li key={index} className="pl-1">{step}</li>
+                ))}
+              </ol>
+            </div>
+
+            <a
+              href={airdrop.referral_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full px-6 py-3 text-center font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors duration-200"
+            >
+              Participate Now
+            </a>
           </div>
         ))}
       </div>
@@ -368,4 +381,4 @@ const Home = () => {
   )
 }
 
-export default Home 
+export default Home
