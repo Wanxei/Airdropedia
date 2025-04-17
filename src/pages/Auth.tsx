@@ -42,6 +42,9 @@ const AuthPage = () => {
                 },
               },
               style: {
+                button: {
+                  color: 'white',
+                },
                 anchor: {
                   color: '#000000',
                 },
@@ -74,4 +77,4 @@ const AuthPage = () => {
   )
 }
 
-export default AuthPage 
+export default AuthPage
