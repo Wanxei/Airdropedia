@@ -216,7 +216,7 @@ const AddProject = () => {
             <div className="space-y-6">
               <div>
                 <label htmlFor="project_name" className="block text-sm font-medium text-black mb-2">
-                  Project Name *
+                  Project Name
                 </label>
                 <input
                   type="text"
@@ -232,7 +232,7 @@ const AddProject = () => {
 
               <div>
                 <label htmlFor="blockchain" className="block text-sm font-medium text-black mb-2">
-                  Blockchain *
+                  Blockchain
                 </label>
                 <select
                   id="blockchain"
@@ -252,7 +252,7 @@ const AddProject = () => {
 
               <div>
                 <label htmlFor="ticker" className="block text-sm font-medium text-black mb-2">
-                  Ticker *
+                  Ticker
                 </label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
@@ -273,7 +273,7 @@ const AddProject = () => {
 
               <div>
                 <label htmlFor="cost" className="block text-sm font-medium text-black mb-2">
-                  Cost to Participate *
+                  Cost to Participate
                 </label>
                 <select
                   id="cost"
@@ -364,7 +364,7 @@ const AddProject = () => {
 
               <div>
                 <label htmlFor="referral_link" className="block text-sm font-medium text-black mb-2">
-                  Referral Link *
+                  Referral Link
                 </label>
                 <input
                   type="url"
@@ -382,7 +382,7 @@ const AddProject = () => {
 
           <div>
             <label htmlFor="steps" className="block text-sm font-medium text-black mb-2">
-              Steps to Participate *
+              Steps to Participate
             </label>
             <textarea
               id="steps"
@@ -428,4 +428,4 @@ const AddProject = () => {
   )
 }
 
-export default AddProject 
+export default AddProject
